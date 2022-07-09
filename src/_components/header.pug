@@ -1,0 +1,9 @@
+header.header.jq-header
+  ._container
+    nav
+      ul
+        li
+          a(href='/') Главная
+        each link in links
+          li
+            a(href=`/pages${link.path}`)=link.name

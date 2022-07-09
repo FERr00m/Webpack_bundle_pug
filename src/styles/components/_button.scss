@@ -1,0 +1,68 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+// Переменные для кнопки
+
+// … включите сюда любые правила для кнопки:
+// - миксины
+// - плейсхолдеры
+// - функции
+
+/**
+ * Кнопки
+ */
+.btn {
+  min-width: 160px;
+  min-height: 46px;
+  font-size: rem(18px);
+  display: flex;
+  align-items: center;
+  background-color: $font-special-color;
+  box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  border: none;
+  padding: 0 rem(16px);
+  color: $font-second-color;
+  letter-spacing: -0.025em;
+  transition: all .2s ease-in;
+  //&:hover {
+  //  text-decoration: none;
+  //  border-color: $brand-color;
+  //  outline: 0;
+  //  box-shadow: 0 0 0 0 #05575bab;
+  //  background-color: lighten($font-special-color, 8%);
+  //}
+}
+.btn-transparent {
+  border: 1px solid $brand-color;
+  background-color: inherit;
+  box-shadow: none;
+  color: $brand-color;
+}
+//.button {
+//  display: block;
+//  padding: 1rem;
+//  color: $button-color;
+//  // … etc.
+//
+//  /**
+//   * Инлайновая кнопка для больших экранов
+//   */
+//  @include respond-to('xl') {
+//    display: inline-block;
+//  }
+//}
+
+/**
+ * Иконки внутри кнопок
+ */
+.button > svg {
+  fill: currentcolor;
+}
+
+/**
+ * Инлайновая кнопка
+ */
+.button--inline {
+  display: inline-block;
+}

@@ -1,0 +1,142 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/**
+ * Set up a decent box model on the root element
+ */
+:root {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+html{
+  scroll-behavior: smooth;
+  font-size: calc(0.4em + 0.5vw);
+  @include media('max', 'sm') {
+    font-size: 12px;
+  }
+}
+body {
+  font-family: $Roboto, $text-font-stack;
+  font-size: rem(16px);
+  line-height: rem(21px);
+  font-style: normal;
+  font-weight: normal;
+  color: $font-main-color;
+  position: relative;
+  background-color: $bg-main-color;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  text-rendering: auto;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  outline: none !important;
+  &.fixed {
+    overflow: hidden;
+  }
+}
+html::-webkit-scrollbar {
+  height: 5px;
+  width: 10px;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $brand-color;
+}
+html::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #f9f9fd;
+}
+a:visited {
+  color: inherit;
+}
+a:hover:not(.hover-btn-animation,
+            .hvr-underline-from-center,
+            .projects-content-list__link) {
+  text-decoration: underline;
+}
+a:active {
+  opacity: .5;
+}
+button:hover {
+  border-color: $brand-color;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem $brand-color;
+}
+button:active {
+  opacity: .5;
+}
+img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+svg {
+  z-index: 5;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+button {
+  cursor: pointer;
+}
+button[disabled] {
+  cursor: not-allowed;
+}
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4{
+  margin: 0;
+  padding: 0;
+}
+p {
+  margin: 0;
+}
+[type="search"] {
+  outline-offset: -2px;
+  -webkit-appearance: none;
+}
+._container {
+  max-width: rem(1360px);
+  margin: 0 auto;
+  padding: 0 rem(20px);
+  &--relative {
+    position: relative;
+  }
+}
+main:not(.index-page) {
+  padding-top: rem(160px);
+}
+textarea {
+  resize: vertical;
+}
+input {
+  border: 0;
+}
+input:focus {
+  border-color: $brand-color;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(38 74 135 / 25%);
+  border-radius: 0.25rem;
+}
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
