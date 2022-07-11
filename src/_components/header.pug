@@ -6,4 +6,4 @@ header.header.jq-header
           a(href='/') Главная
         each link in links
           li
-            a(href=`/pages${link.path}`)=link.name
+            a(href=`${link.path}`)=link.name

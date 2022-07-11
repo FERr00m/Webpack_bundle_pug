@@ -7,6 +7,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 const mode = process.env.NODE_ENV;
 const isDev = mode === 'development';
@@ -25,7 +26,7 @@ const optimization = () => {
   if (!isDev) {
     config.minimizer = [
       new CssMinimizerPlugin(),
-      new TerserPlugin()
+      new TerserPlugin(),
     ]
   }
 
@@ -66,8 +67,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.resolve(__dirname,'src/index.pug'),
-      //inject: false
+      inject: "body",
+      scriptLoading: "blocking",
+      minify: false,
+      base: { 'href': 'http://example.com/index.html' },
+      title: 'Main'
     }),
+
     ...otherPages.map(page => {
       const temp = page
         .split(".")
@@ -75,19 +81,40 @@ module.exports = {
         .join(".");
 
       return new HtmlWebpackPlugin({
-        filename: `pages/${temp}.html`,
+        filename: `${temp}.html`,
         template: `pages/${page}`,
-        inject: false,
+        inject: "body",
+        scriptLoading: "blocking",
         minify: false
       });
     }),
     new MiniCssExtractPlugin({
-      filename: `css/style.css`
+      filename: `css/main.css`
+    }),
+    new ImageMinimizerPlugin({
+      minimizer: {
+        implementation: ImageMinimizerPlugin.imageminMinify,
+        options: {
+          // Lossless optimization with custom option
+          // Feel free to experiment with options for better result for you
+          plugins: [
+            ["gifsicle", { interlaced: true }],
+            // ['jpegtran', { progressive: true }],  // Lossless plugin
+            ['mozjpeg', { quality: 85 }],  // Lossy plugin
+            ["optipng", { optimizationLevel: 5 }],
+
+          ],
+        },
+      },
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
           from: 'favicon/**',
+          to: path.resolve(__dirname, 'build')
+        },
+        {
+          from: 'img/**',
           to: path.resolve(__dirname, 'build')
         },
         {
@@ -113,6 +140,11 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg|webp)$/i,
+        type: "asset",
+        loader: ImageMinimizerPlugin.loader
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -177,25 +209,29 @@ module.exports = {
       }
     ],
   },
-
   optimization: optimization(),
   devServer: {
-    watchFiles: ['src/**/*'],
-    port: 8080, // порт
-    open: true, // открывать браузер при запуске
-    hot: true, // при добавлении новых модулей сразу их подключать
-    compress: true, // gzip компрессия
+    watchFiles: {
+      paths: ['src/**/*'],
+      options: {
+        usePolling: true,
+      },
+    },
+    port: 8080,  // порт
+    open: true,  // открывать браузер при запуске
+    hot: true,  // при добавлении новых модулей сразу их подключать
+    compress: true,  // gzip компрессия
     client: {
       overlay: {
-        errors: true,
-        warnings: false,
+        errors: true,  // оверлей при ошибках
+        warnings: false
       },
-      progress: true,
-    }, // оверлей при ошибках
-    devMiddleware: {
-      writeToDisk: false, // записывать файлы в папку build
+      progress: true,  // Выводит ход компиляции в процентах в браузере
     },
-    historyApiFallback: true, // использование history HTML5
+    devMiddleware: {
+      writeToDisk: true,  // записывать файлы в папку build
+    },
+    historyApiFallback: true,  // использование history HTML5
 
   },
   devtool: isDev && 'source-map'
