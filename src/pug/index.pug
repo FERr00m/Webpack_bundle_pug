@@ -3,10 +3,10 @@ extends ./templates/layout
 block main-content
   main.index-page
     section.index-page__promo.promo-index
-      ._container
-        h1 Main page
+      ._container(style="display: flex; flex-direction: column; align-items: center; gap: 2rem")
+        h1.title Главная страница
+        img(src="/img/12.jpg" width="300" height="300" alt="Foto" loading="lazy")
         svg(width="200" height="200")
           use(xlink:href='/img/icons.svg#email-blue')
         svg(width="200" height="200")
           use(xlink:href='/img/icons.svg#hipster-music')
-        img(src="/img/12.jpg" width="400" height="400" alt="Foto" loading="lazy")

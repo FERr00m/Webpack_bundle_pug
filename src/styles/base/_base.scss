@@ -6,6 +6,10 @@
  * Set up a decent box model on the root element
  */
 :root {
+  --brand-color: #264a87;
+  --font-main-color: #ffffff;
+  --font-special-color: #045da0;
+  --bg-color: rgb(145, 92, 92);
   box-sizing: border-box;
 }
 *,
@@ -31,9 +35,9 @@ body {
   line-height: rem(21px);
   font-style: normal;
   font-weight: normal;
-  color: $font-main-color;
+  color: var(--font-main-color);
   position: relative;
-  background-color: $bg-main-color;
+  background-color: var(--bg-color);
   margin: 0;
   padding: 0;
   width: 100%;
@@ -53,15 +57,15 @@ html::-webkit-scrollbar {
   height: 5px;
   width: 10px;
   background-color: #f9f9fd;
-  border-radius: 10px;
+  //border-radius: 10px;
 }
 html::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: $brand-color;
+  //border-radius: 10px;
+  background-color: var(--brand-color);
 }
 html::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  //border-radius: 10px;
   background-color: #f9f9fd;
 }
 a:visited {
@@ -159,4 +163,11 @@ input[type='search']::-webkit-search-cancel-button,
 input[type='search']::-webkit-search-results-button,
 input[type='search']::-webkit-search-results-decoration {
   display: none;
+}
+.title {
+  color: tomato;
+  font-size: rem(45px);
+  margin: rem(15px);
+  text-align: center;
+  text-transform: uppercase;
 }
