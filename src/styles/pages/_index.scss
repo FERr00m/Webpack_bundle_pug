@@ -2,9 +2,13 @@
 // This file contains styles that are specific to the "Index" page.
 // -----------------------------------------------------------------------------
 .index-page {
+  background-color: antiquewhite;
   display: flex;
   max-width: rem(1000px);
   margin: 0 auto;
   align-items: center;
   justify-content: center;
+}
+.svg-icon {
+  fill: aqua;
 }

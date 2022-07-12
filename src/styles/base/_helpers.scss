@@ -24,8 +24,8 @@
 
   @each $point, $width in $breakpoints {
     @include respond-to($point) {
-      max-width: map-get($container-size, $point);;
-    };
+      max-width: map-get($container-size, $point);
+    }
   }
 }
 

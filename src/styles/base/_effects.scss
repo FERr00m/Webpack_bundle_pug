@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 .hvr-underline-from-center:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: 0;
   left: 51%;
@@ -33,13 +33,13 @@
   right: 0;
 }
 // Blur
-.box-wrap:hover .box{
-  filter:blur(3px);
+.box-wrap:hover .box {
+  filter: blur(3px);
 }
-.box-wrap:hover .box:hover{
-  transform:scale(1);
-  filter:blur(0px);
-  opacity:1;
+.box-wrap:hover .box:hover {
+  transform: scale(1);
+  filter: blur(0px);
+  opacity: 1;
 }
 /*====Animation=====*/
 .hover-btn-animation {
@@ -57,7 +57,7 @@
 .hover-btn-animation .span {
   position: absolute;
   display: block;
-  content: "";
+  content: '';
   z-index: 0;
   width: 0;
   height: 0;

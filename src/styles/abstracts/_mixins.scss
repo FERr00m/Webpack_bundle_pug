@@ -79,7 +79,6 @@
 /* Миксин замены цвета placeholder у input.
 Нужно добавить в стилях элемента конструкцию вида @include placeholder(#000); */
 @mixin placeholder($color, $font) {
-
   &::-webkit-input-placeholder {
     color: $color;
     font-size: $font;
@@ -88,91 +87,95 @@
   &::-moz-placeholder {
     color: $color;
     font-size: $font;
-
   }
 
   &:-ms-input-placeholder {
     color: $color;
     font-size: $font;
-
   }
 }
 
-
-@mixin width-flex($width){
+@mixin width-flex($width) {
   width: $width;
   min-width: $width;
 }
 
-@mixin background($url){
-  background-image:url('../img/' + $url);
+@mixin background($url) {
+  background-image: url('../img/' + $url);
   background-position: center;
   background-repeat: no-repeat;
 }
 
-@mixin background-contain($url){
-  background-image:url('../img/' + $url);
+@mixin background-contain($url) {
+  background-image: url('../img/' + $url);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-@mixin background-cover($url){
-  background-image:url('../img/' + $url);
+@mixin background-cover($url) {
+  background-image: url('../img/' + $url);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-@mixin background-cover-top($url){
-  background-image:url('../img/' + $url);
+@mixin background-cover-top($url) {
+  background-image: url('../img/' + $url);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 }
-@mixin background-cover-right($url){
-  background-image:url('../img/' + $url);
+@mixin background-cover-right($url) {
+  background-image: url('../img/' + $url);
   background-position: center right;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 @mixin input-placeholder {
-  &.placeholder { @content; }
-  &:-moz-placeholder { @content; }
-  &::-moz-placeholder { @content; }
-  &:-ms-input-placeholder { @content; }
-  &::-webkit-input-placeholder { @content; }
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
 }
 
-
-@mixin hover-link($color){
-  &:hover{
+@mixin hover-link($color) {
+  &:hover {
     color: $color;
   }
 }
-@mixin df{
+@mixin df {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@mixin last-mb-0{
-  &:last-child{
+@mixin last-mb-0 {
+  &:last-child {
     margin-bottom: 0;
   }
 }
-@mixin last-mr-0{
-  &:last-child{
+@mixin last-mr-0 {
+  &:last-child {
     margin-right: 0;
   }
 }
 
-
-
-@mixin before-mr($img, $width, $height, $mr){
+@mixin before-mr($img, $width, $height, $mr) {
   display: inline-flex;
   align-items: center;
-  &:before{
+  &:before {
     content: '';
     @include background-contain($img);
     @include width-flex($width);
@@ -181,10 +184,10 @@
   }
 }
 
-@mixin before-ml($img, $width, $height, $ml){
+@mixin before-ml($img, $width, $height, $ml) {
   display: inline-flex;
   align-items: center;
-  &:before{
+  &:before {
     content: '';
     @include background-contain($img);
     @include width-flex($width);
@@ -193,10 +196,10 @@
   }
 }
 
-@mixin after-ml($img, $width, $height, $ml){
+@mixin after-ml($img, $width, $height, $ml) {
   display: inline-flex;
   align-items: center;
-  &:after{
+  &:after {
     content: '';
     @include background-contain($img);
     @include width-flex($width);
@@ -205,7 +208,7 @@
   }
 }
 
-@mixin flex-between{
+@mixin flex-between {
   display: flex;
   align-items: center;
   justify-content: space-between;

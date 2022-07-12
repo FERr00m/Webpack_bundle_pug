@@ -11,11 +11,13 @@ $LatoBlack: 'Lato-Black';
 
 /// Regular font family
 /// @type List
-$text-font-stack: Arial, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif !default;
+$text-font-stack: Arial, -apple-system, system-ui, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', sans-serif !default;
 
 /// Code (monospace) font family
 /// @type List
-$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+  'Monaco', monospace !default;
 
 /// Copy text color
 /// @type Color
@@ -27,10 +29,10 @@ $font-second-color: #ffffff !default;
 
 /// Main brand color
 /// @type Color
-$brand-color: #264A87 !default;
+$brand-color: #264a87 !default;
 
 /// @type Color
-$font-special-color: #045DA0 !default;
+$font-special-color: #045da0 !default;
 
 $hover-color: #dfe4ed !default;
 
@@ -42,7 +44,13 @@ $bg-main-color: #ffffff !default;
 /// @type Length
 $max-width: 1320px !default;
 
-$sizes: ("xs":320px, "sm":576px, "md":768px, "lg":991.98px, "xl":1200px);
+$sizes: (
+  'xs': 320px,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 991.98px,
+  'xl': 1200px,
+);
 
 /// Breakpoints map
 /// @prop {String} keys - Keys are identifiers mapped to a given length
@@ -56,18 +64,34 @@ $container-size: (
   'md': 720px,
   'lg': 960px,
   'xl': 1140px,
-  'xxl': 1320px
+  'xxl': 1320px,
 ) !default;
 
 $breakpoints: (
-  'xxxs':  ( min-width: 320px ),
-  'xxs':  ( min-width: 375px ),
-  'xs':  ( min-width: 425px ),
-  'sm':  ( min-width: 576px ),
-  'md': ( min-width: 768px ),
-  'lg': ( min-width: 992px ),
-  'xl': ( min-width: 1200px ),
-  'xxl':  ( min-width: 1400px )
+  'xxxs': (
+    min-width: 320px,
+  ),
+  'xxs': (
+    min-width: 375px,
+  ),
+  'xs': (
+    min-width: 425px,
+  ),
+  'sm': (
+    min-width: 576px,
+  ),
+  'md': (
+    min-width: 768px,
+  ),
+  'lg': (
+    min-width: 992px,
+  ),
+  'xl': (
+    min-width: 1200px,
+  ),
+  'xxl': (
+    min-width: 1400px,
+  ),
 ) !default;
 
 /// Relative or absolute URL where all assets are served from

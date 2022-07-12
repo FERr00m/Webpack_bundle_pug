@@ -39,5 +39,5 @@
 }
 
 @function size-w($size, $vw) {
-  @return (math.div(100,  math.div($vw, $size))) * 1vw;
+  @return (math.div(100, math.div($vw, $size))) * 1vw;
 }
