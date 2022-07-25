@@ -9,6 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 
 const mode = process.env.NODE_ENV;
 const isDev = mode === 'development';
@@ -93,6 +94,19 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: `css/main.css`,
+    }),
+    new ImageminWebpWebpackPlugin({
+      config: [
+        {
+          test: /\.(jpe?g|png)/,
+          options: {
+            quality: 75,
+          },
+        },
+      ],
+      overrideExtension: true,
+      detailedLogs: true,
+      strict: true,
     }),
     new ImageMinimizerPlugin({
       minimizer: {

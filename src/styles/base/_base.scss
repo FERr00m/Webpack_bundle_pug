@@ -23,11 +23,6 @@ html {
   @include media('max', 'sm') {
     font-size: 12px;
   }
-  // overflow: auto;
-  // @supports (scrollbar-gutter: stable) {
-  //   overflow: auto;
-  //   scrollbar-gutter: stable;
-  // }
 }
 body {
   font-family: $Roboto, $text-font-stack;
@@ -91,6 +86,9 @@ img {
   height: auto;
   -o-object-fit: cover;
   object-fit: cover;
+}
+figure {
+  margin: 0;
 }
 svg {
   z-index: 5;

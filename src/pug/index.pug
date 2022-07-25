@@ -5,8 +5,15 @@ block main-content
     section.index-page__promo.promo-index
       ._container(style="display: flex; flex-direction: column; align-items: center; gap: 2rem")
         h1.title Главная страница
-        img(src="/img/12.jpg" width="300" height="300" alt="Foto" loading="lazy")
+        picture
+          source(type='image/webp' srcset='/img/12.webp')
+          img(src="/img/12.jpg" width="300" height="300" alt="Foto" loading="lazy")
         svg(width="200" height="200")
           use(xlink:href='/img/icons.svg#email-blue')
         svg(width="200" height="200")
           use(xlink:href='/img/icons.svg#hipster-music')
+        figure
+          picture
+            source(type='image/webp' srcset='/img/3.webp')
+            img(src="/img/3.jpg" width="1200" height="600" alt="Foto" loading="lazy")
+          figcaption Foto
