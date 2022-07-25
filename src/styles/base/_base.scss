@@ -123,6 +123,9 @@ p {
   outline-offset: -2px;
   -webkit-appearance: none;
 }
+[v-cloak] {
+  visibility: hidden;
+}
 ._container {
   max-width: rem(1360px);
   margin: 0 auto;

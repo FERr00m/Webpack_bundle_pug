@@ -51,6 +51,7 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1"
+    "@babel/polyfill": "^7.12.1",
+    "vue": "^3.2.36"
   }
 }
