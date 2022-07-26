@@ -5,7 +5,10 @@ block main-content
     section.index-page__promo.promo-index
       ._container(style="display: flex; flex-direction: column; align-items: center; gap: 2rem")
         h1.title Главная страница {{ message }}
-        button(@click='vueClick') {{ counter > 2 ? 'Молодец!' : 'Кликни 3 раза!' }} {{ counter }}
+        button.js-hover-btn.hover-btn-animation(@click='vueClick')
+          .span
+          span
+            | {{ counter > 2 ? 'Молодец!' : 'Кликни 3 раза!' }} {{ counter }}
         picture
           source(type='image/webp' srcset='/img/12.webp')
           img(src="/img/12.jpg" width="300" height="300" alt="Foto" loading="lazy")
