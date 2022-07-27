@@ -1,16 +1,18 @@
-mixin icon(name, mod)
-  - mod = mod || ''
-  if mod
-    svg(class=`icon icon-${name} ${mod}`)
-      use(xlink:href=`img/sprite.svg#${name}`)
-  else
-    svg(class=`icon icon-${name}`)
-      use(xlink:href=`img/sprite.svg#${name}`)
+mixin icon(name, w=100, h=100)
+  svg(class=`svg-icon svg-icon--${name}`, width=`${w}`, height=`${h}`)
+    use(xlink:href=`/img/icons.svg#${name}`)
 
 //--------------------
 
 mixin randomNum(numMax = 100)
   =(Math.random() * numMax + 1 | 0)
+
+//--------------------
+
+mixin picture(name, w=500, h=500, alt='', ext='jpg')
+  picture
+    source(type='image/webp' srcset=`/img/${name}.webp`)
+    img(src=`/img/${name}.${ext}` width=`${w}`, height=`${h}` alt=`${alt}` loading="lazy")
 
 //--------------------
 

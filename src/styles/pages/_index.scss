@@ -9,6 +9,11 @@
   align-items: center;
   justify-content: center;
 }
+button.js-hover-btn {
+  width: 15rem;
+  height: 5rem;
+  padding: .5em 1em;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;

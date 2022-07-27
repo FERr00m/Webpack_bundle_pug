@@ -9,15 +9,9 @@ block main-content
           .span
           span
             | {{ counter > 2 ? 'Молодец!' : 'Кликни 3 раза!' }} {{ counter }}
-        picture
-          source(type='image/webp' srcset='/img/12.webp')
-          img(src="/img/12.jpg" width="300" height="300" alt="Foto" loading="lazy")
-        svg(width="200" height="200")
-          use(xlink:href='/img/icons.svg#email-blue')
-        svg(width="200" height="200")
-          use(xlink:href='/img/icons.svg#hipster-music')
+        +picture('12', 300, 300, 'alt')
+        +icon('email-blue')
+        +icon('hipster-music', 200, 200)
         figure
-          picture
-            source(type='image/webp' srcset='/img/3.webp')
-            img(src="/img/3.jpg" width="1200" height="600" alt="Foto" loading="lazy")
+          +picture('3', 300, 300, 'alt')
           figcaption Foto
