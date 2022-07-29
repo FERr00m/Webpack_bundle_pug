@@ -5,6 +5,8 @@ block main-content
     section.index-page__promo.promo-index
       ._container(style="display: flex; flex-direction: column; align-items: center; gap: 2rem")
         h1.title Главная страница {{ message }}
+        span(style='color: Dodgerblue;')
+          i.fa-solid.fa-thumbs-up.fa-6x
         button.js-hover-btn.hover-btn-animation(@click='vueClick')
           .span
           span
