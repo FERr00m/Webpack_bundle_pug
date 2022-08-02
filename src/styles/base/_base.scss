@@ -19,7 +19,7 @@
 }
 html {
   scroll-behavior: smooth;
-  font-size: calc(0.4em + 0.5vw);
+  font-size: calc(0.4em + 0.5vw);  // На ширине экрана 1920px размер шрифта 16px
   @include media('max', 'sm') {
     font-size: 12px;
   }
@@ -32,7 +32,8 @@ body {
   font-weight: normal;
   color: var(--font-main-color);
   position: relative;
-  background-color: var(--bg-color);
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   margin: 0;
   padding: 0;
   width: 100%;

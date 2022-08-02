@@ -2,6 +2,10 @@ function requireAll(r) {
   r.keys().forEach(r);
 }
 
+// Libs
+import '@/libs/css/normalize';
+import '@/libs/css/fancybox';
+import '@/libs/css/splide.min';
 // Main css
 import '@/styles/style';
 

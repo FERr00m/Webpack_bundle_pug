@@ -5,7 +5,8 @@ block main-content
     section.index-page__promo.promo-index
       ._container(style="display: flex; flex-direction: column; align-items: center; gap: 2rem")
         h1.title Главная страница {{ message }}
-        span(style='color: Dodgerblue;')
+        +icon('hipster-music', 400, 400)
+        span(style='color: Dodgerblue; height: 96px')
           i.fa-solid.fa-thumbs-up.fa-6x
         button.js-hover-btn.hover-btn-animation(@click='vueClick')
           .span
@@ -13,7 +14,6 @@ block main-content
             | {{ counter > 2 ? 'Молодец!' : 'Кликни 3 раза!' }} {{ counter }}
         +picture('12', 300, 300, 'alt')
         +icon('email-blue')
-        +icon('hipster-music', 200, 200)
         figure
           +picture('3', 300, 300, 'alt')
           figcaption Foto

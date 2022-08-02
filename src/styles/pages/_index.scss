@@ -22,3 +22,47 @@ button.js-hover-btn {
 .fade-leave-to {
   opacity: 0;
 }
+.splide__progress__bar {
+  height: 3px;
+  background: #ccc;
+}
+.splide__slide {
+  height: 600px;
+}
+.splide__slide img,
+.splide__slide svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.svg-icon--hipster-music {
+  animation-duration: 3s;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotateY {
+  0% {
+    color: #ccc;
+  }
+  50% {
+    color: tomato;
+  }
+  100% {
+    color: #ccc;
+  }
+}
+.title {
+  animation-duration: 3s;
+  animation-name: rotateY;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}

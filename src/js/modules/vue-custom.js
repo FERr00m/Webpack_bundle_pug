@@ -4,7 +4,7 @@ const vueCustom = () => {
   createApp({
     data() {
       return {
-        message: 'With Vue! & GSAP',
+        message: 'With Vue!',
         counter: 0,
         visible: true,
       };
@@ -28,7 +28,16 @@ const vueCustom = () => {
             transform: 'scale(3.5)',
             y: -200,
           });
-          gsap.to('body', { duration: 1, backgroundColor: 'black', delay: 3 });
+          let t2 = gsap.timeline({ repeat: 2 });
+          t2.to('body', {
+            duration: 5,
+            background: `radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)`,
+          });
+          t2.to('body', {
+            duration: 5,
+            background: `radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)`,
+          });
+          this.message += ' & GSAP';
         }
       },
       mainFontSizeMin() {
