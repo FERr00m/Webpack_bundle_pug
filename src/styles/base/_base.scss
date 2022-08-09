@@ -24,6 +24,12 @@ html {
     font-size: 12px;
   }
 }
+@media print {
+  * {
+    color: black !important;
+    background: none !important;
+  }
+}
 body {
   font-family: $Roboto, $text-font-stack;
   font-size: rem(16px);

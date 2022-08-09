@@ -12,7 +12,7 @@ const vueCustom = () => {
     methods: {
       vueClick() {
         this.counter++;
-        if (this.counter == 3) {
+        if (this.counter === 3) {
           let t1 = gsap.timeline();
           t1.to('.fa-thumbs-up', {
             duration: 3,
@@ -38,6 +38,16 @@ const vueCustom = () => {
             background: `radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)`,
           });
           this.message += ' & GSAP';
+        }
+      },
+      vueClick2() {
+        this.counter++;
+        if (this.counter === 3) {
+          myFunctions.findGoodPicture(
+            'https://picsum.photos/2000/3000',
+            '#progress',
+            'img'
+          );
         }
       },
       mainFontSizeMin() {

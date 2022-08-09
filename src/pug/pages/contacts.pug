@@ -5,3 +5,9 @@ block main-content
     section.contacts-page__promo
       ._container
         h1.title Контакты
+        button.js-hover-btn.hover-btn-animation(@click='vueClick2')
+          .span
+          span
+            | {{ counter > 2 ? 'Молодец! Теперь жди...' : 'Кликни 3 раза!' }} {{ counter }}
+        progress#progress
+        img(width="600" height="600")

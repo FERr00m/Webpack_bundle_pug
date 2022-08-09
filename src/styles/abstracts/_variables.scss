@@ -45,11 +45,11 @@ $bg-main-color: #ffffff !default;
 $max-width: 1320px !default;
 
 $sizes: (
-  'xs': 319.98px,
-  'sm': 575.98px,
-  'md': 767.98px,
-  'lg': 991.98px,
-  'xl': 1199.98px,
+  'xs': 20em,
+  'sm': 36em,
+  'md': 48em,
+  'lg': 62em,
+  'xl': 75em,
 );
 
 /// Breakpoints map
@@ -94,8 +94,8 @@ $breakpoints: (
   ),
 ) !default;
 
-/// Relative or absolute URL where all assets are served from
-/// @type String
-/// @example scss - When using a CDN
-///   $base-url: 'http://cdn.example.com/assets/';
+// Relative or absolute URL where all assets are served from
+// @type String
+// @example scss - When using a CDN
+// $base-url: 'http://cdn.example.com/assets/';
 $base-url: '/img/' !default;

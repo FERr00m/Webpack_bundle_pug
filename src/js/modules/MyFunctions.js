@@ -79,6 +79,141 @@ class MyFunctions {
       darkTheme.disabled = true;
     }
   }
+
+  async findGoodPicture(url, selectorProgress, selectorImg = '') {
+    /*
+     * Асинхронная функция для потоковой передачи тела объекта Response,
+     * полученного из запроса fetch(). Принимает в первом аргументе
+     * объект Response и за ним два необязательных обратных вызова.
+     *
+     * Если вы указали функцию в качестве второго аргумента, то этот обратный
+     * вызов reportProgress будет вызываться один раз для каждой получаемой порции.
+     * В первом аргументе передается общее количество байтов, полученных до сих пор.
+     * Во втором аргументе передается число между 0 и 1, которое указывает,
+     * насколько загрузка завершена. Однако если объект Response не имеет
+     * заголовка "Content-Length”, тогда вторым аргументом всегда будет NaN.
+     *
+     * Если вы хотите обрабатывать данные в порциях, когда они прибывают,
+     * то укажите функцию в третьем аргументе. Порции будут передаваться
+     * этому обратному вызову
+     * processChunk как объекты Uint8Array.
+     *
+     * streamBody() возвращает объект Promise, который разрешается в строку.
+     * Если обратный вызов processChunk был предоставлен, тогда эта строка
+     * является сцеплением значений, возвращенных processChunk. Иначе строка
+     * будет сцеплением значений порций, преобразованных в строки UTF-8.
+     */
+    async function streamBody(
+      response,
+      reportProgress,
+      processChunk,
+      selectorProgress
+    ) {
+      // Ожидаемое количество байтов или NaN, если нет заголовка.
+      let expectedBytes = parseInt(response.headers.get('Content-Length'));
+      let bytesRead = 0; // Сколько байтов получено до сих пор.
+      let reader = response.body.getReader(); // Читать байты с помощью этой функции.
+      let decoder = new TextDecoder('utf-8'); //Для преобразования байтов в текст
+      let body = ''; // Текст, прочитанный до сих пор.
+
+      if (selectorImg) document.querySelector(selectorImg).src = response.url;
+
+      while (true) {
+        // Цикл, пока не будет выход ниже,
+        let { done, value } = await reader.read(); // Читать порцию.
+        if (value) {
+          // Если мы получили байтовый массив:
+          if (processChunk) {
+            // обработать байты, когда обратный вызов был передан,
+            let processed = processChunk(value);
+            if (processed) {
+              body += processed;
+            }
+          } else {
+            //В противном случае преобразовать байты
+            body += decoder.decode(value, { stream: true }); // в текст.
+          }
+          if (reportProgress) {
+            // Если обратный вызов продвижения был передан, тогда вызвать его.
+            bytesRead += value.length;
+            reportProgress(
+              bytesRead,
+              expectedBytes,
+              bytesRead / expectedBytes,
+              response.url,
+              selectorProgress
+            );
+          }
+        }
+        if (done) {
+          // Если это последняя порция,
+          break; // тогда выйти из него.
+        }
+      }
+      return body; // Возвратить накопленный текст тела.
+    }
+
+    function updateProgress(
+      bytesRead,
+      expectedBytes,
+      prog,
+      url,
+      selectorProgress = 'progress'
+    ) {
+      let progress = document.querySelector(selectorProgress);
+      if (isNaN(prog)) {
+        console.warn('Error');
+        return;
+      }
+      progress.value = prog;
+    }
+
+    async function loop(url) {
+      let result = await fetch(url).then((res) => {
+        return res;
+      });
+      return result;
+    }
+
+    let res = await loop(url);
+    let headers = res.headers.get('Content-Length');
+    while (!headers) {
+      // Делаем запросы пока не получим картинку с Content-Length
+      res = await loop(url);
+      headers = res.headers.get('Content-Length');
+    }
+    fetch(res.url)
+      .then((response) =>
+        streamBody(response, updateProgress, false, selectorProgress)
+      )
+      .then((bodyText) => JSON.parse(bodyText))
+      .then((res) => console.log(res))
+      .catch((err) => console.warn(err));
+  }
+  // Эта функция похожа на fetch (), но добавляет поддержку свойства
+  // тайм-аута (timeout) в объекте параметров (options) и прекращает
+  // извлечение, если оно не завершилось за количество миллисекунд,
+  // указанное в timeout.
+  fetchWithTimeout(url, options = {}) {
+    if (options.timeout) {
+      // Если свойство timeout существует и не равно нулю
+      let controller = new AbortController(); // тогда создать контроллер
+      options.signal = controller.signal; // и установить свойство signal.
+      // Запустить таймер, который будет посылать сигнал прекращения
+      // по прошествии указанного количество миллисекунд. Обратите
+      // внимание, что мы никогда не отменяем этот таймер. Вызов abort()
+      // после того, как извлечение завершено, не имеет эффекта.
+      setTimeout(() => {
+        controller.abort();
+      }, options.timeout);
+    }
+    // Теперь просто выполнить нормальное извлечение.
+    return fetch(url, options);
+  }
+
+  // Пример
+  //fetchWithTimeout("https://picsum.photos/2000/3000", { timeout: 200 })
+  //  .then((res) => console.log(res));
 }
 
 export default MyFunctions;
