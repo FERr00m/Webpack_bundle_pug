@@ -12,57 +12,24 @@
  * Кнопки
  */
 .btn {
-  min-width: 160px;
-  min-height: 46px;
-  font-size: rem(18px);
-  display: flex;
-  align-items: center;
-  background-color: $font-special-color;
-  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  border: none;
-  padding: 0 rem(16px);
-  color: $font-second-color;
-  letter-spacing: -0.025em;
+  font-size: 1rem;
+  background-color: transparent;
+  border-radius: 0.2em;
+  border: 1px solid #000;
+  padding: 0.5em 0.8em;
   transition: all 0.2s ease-in;
-  //&:hover {
-  //  text-decoration: none;
-  //  border-color: $brand-color;
-  //  outline: 0;
-  //  box-shadow: 0 0 0 0 #05575bab;
-  //  background-color: lighten($font-special-color, 8%);
-  //}
 }
-.btn-transparent {
-  border: 1px solid $brand-color;
-  background-color: inherit;
-  box-shadow: none;
-  color: $brand-color;
+.btn--small {
+  font-size: 0.8rem;
 }
-//.button {
-//  display: block;
-//  padding: 1rem;
-//  color: $button-color;
-//  // … etc.
-//
-//  /**
-//   * Инлайновая кнопка для больших экранов
-//   */
-//  @include respond-to('xl') {
-//    display: inline-block;
-//  }
-//}
-
-/**
- * Иконки внутри кнопок
- */
-.button > svg {
-  fill: currentcolor;
+.btn--large {
+  font-size: 1.2rem;
 }
-
-/**
- * Инлайновая кнопка
- */
-.button--inline {
+.btn--success {
+  border-color: #cfe8c9;
+  color: #fff;
+  background-color: #2f5926;
+}
+.btn--inline {
   display: inline-block;
 }

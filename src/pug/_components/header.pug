@@ -1,13 +1,13 @@
 header.header.jq-header
   ._container
     transition(name='fade')
-      nav(v-show="visible")
-        ul
-          li
-            a(href='/') Главная
+      nav.nav(v-show="visible")
+        ul.nav__list
+          li.nav__item
+            a.nav__link(href='/') Главная
           each link in links
-            li
-              a(href=`${link.path}`)=link.name
+            li.nav__item
+              a.nav__link(href=`${link.path}`)=link.name
     button(@click="visible = !visible") {{ visible ? 'Скрыть меню' : 'Показать меню' }}
     | Шрифт
     button(@click="mainFontSizeMin") -

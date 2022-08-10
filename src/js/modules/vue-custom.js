@@ -43,6 +43,7 @@ const vueCustom = () => {
       vueClick2() {
         this.counter++;
         if (this.counter === 3) {
+          $('#progress').removeAttr('value');
           myFunctions.findGoodPicture(
             'https://picsum.photos/2000/3000',
             '#progress',

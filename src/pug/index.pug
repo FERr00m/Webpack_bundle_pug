@@ -8,7 +8,7 @@ block main-content
         +icon('hipster-music', 400, 400)
         span(style='color: Dodgerblue; height: 96px')
           i.fa-solid.fa-thumbs-up.fa-6x
-        button.js-hover-btn.hover-btn-animation(@click='vueClick')
+        button.btn.btn--large.btn--success(@click='vueClick')
           .span
           span
             | {{ counter > 2 ? 'Молодец!' : 'Кликни 3 раза!' }} {{ counter }}

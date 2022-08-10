@@ -41,25 +41,6 @@ button.js-hover-btn {
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes rotateY {
-  0% {
-    color: #ccc;
-  }
-  50% {
-    color: tomato;
-  }
-  100% {
-    color: #ccc;
-  }
-}
 .title {
   animation-duration: 3s;
   animation-name: rotateY;

@@ -9,5 +9,5 @@ block main-content
           .span
           span
             | {{ counter > 2 ? 'Молодец! Теперь жди...' : 'Кликни 3 раза!' }} {{ counter }}
-        progress#progress
+        progress#progress(value="0")
         img(width="600" height="600")

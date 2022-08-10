@@ -70,29 +70,36 @@ html::-webkit-scrollbar-track {
   //border-radius: 10px;
   background-color: #f9f9fd;
 }
+table {
+  width: 100%;
+}
+td {
+  border: 1px solid #000;
+}
+@media (max-width: 30em) {
+  table, thead, tbody, tr, th, td {
+    display: block;
+  }
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  tr {
+    margin-bottom: 1em;
+  }
+}
 a:visited {
   color: inherit;
 }
-a:hover:not(.hover-btn-animation, .hvr-underline-from-center, .projects-content-list__link) {
+a:hover:not(.hover-btn-animation, .hvr-underline-from-center) {
   text-decoration: underline;
 }
 a:active {
   opacity: 0.5;
 }
-button:hover {
-  border-color: $brand-color;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem $brand-color;
-}
-button:active {
-  opacity: 0.5;
-}
 img {
   max-width: 100%;
-  width: 100%;
-  height: auto;
-  -o-object-fit: cover;
-  object-fit: cover;
 }
 figure {
   margin: 0;
@@ -107,18 +114,22 @@ ul {
 }
 button {
   cursor: pointer;
+  border: 1px solid var(--brand-color);
+  outline: none;
 }
 button[disabled] {
   cursor: not-allowed;
 }
+button:hover {
+  outline: none;
+}
+button:active {
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
 h1,
 h2,
 h3,
-h4,
-.h1,
-.h2,
-.h3,
-.h4 {
+h4 {
   margin: 0;
   padding: 0;
   line-height: 1.15;
@@ -151,7 +162,7 @@ input {
   border: 0;
 }
 input:focus {
-  border-color: $brand-color;
+  border-color: var(--brand-color);
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgb(38 74 135 / 25%);
   border-radius: 0.25rem;

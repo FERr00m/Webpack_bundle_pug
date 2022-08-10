@@ -11,9 +11,6 @@ class MyFunctions {
   // classof(()=>{})  // => "Function"
   // classof(new Date ())  // => "Date"
   //=======================================
-  //
-  //
-  //=======================================
   // Асинхронно загружает и выполняет сценарий из указанного URL.
   // Возвращает объект Promise, который разрешается, когда сценарий загружен
   importScript(url) {
@@ -29,9 +26,6 @@ class MyFunctions {
       document.head.append(s); //Добавить <script> в документ
     });
   }
-  //=======================================
-  //
-  //
   //=======================================
   // Где-то в другом месте программы можно зарегистрировать обработчик
   // для событий "busy" и использовать его для показа или сокрытия
@@ -61,9 +55,6 @@ class MyFunctions {
     //   });
   }
   //=======================================
-  //
-  //
-  //=======================================
   // Эта функция осуществляет переключение между "светлой" и "темной" темами
   // Для этого в <link rel="stylesheet" id="light-theme"> или <style id="dark-theme"> должен быть id.
   toggleTheme() {
@@ -79,7 +70,7 @@ class MyFunctions {
       darkTheme.disabled = true;
     }
   }
-
+  // ===========================
   async findGoodPicture(url, selectorProgress, selectorImg = '') {
     /*
      * Асинхронная функция для потоковой передачи тела объекта Response,
@@ -190,6 +181,7 @@ class MyFunctions {
       .then((res) => console.log(res))
       .catch((err) => console.warn(err));
   }
+  // ===========================
   // Эта функция похожа на fetch (), но добавляет поддержку свойства
   // тайм-аута (timeout) в объекте параметров (options) и прекращает
   // извлечение, если оно не завершилось за количество миллисекунд,
@@ -214,6 +206,53 @@ class MyFunctions {
   // Пример
   //fetchWithTimeout("https://picsum.photos/2000/3000", { timeout: 200 })
   //  .then((res) => console.log(res));
+  // ===========================
+  // Возвращает cookie-наборы документа как объект Мар.
+  // Предполагает, что значения cookie-наборов
+  // закодированы посредством encodeURIComponent ().
+  // document.cookie = `version=${encodeURIComponent(document.lastModified)}`;
+  getCookies() {
+    const cookies = new Map(); // Объект, который будет возвращен,
+    const all = document.cookie; // Получить все cookie-наборы в одной большой строке.
+    const list = all.split('; '); // Разбить на индивидуальные пары имя/значение.
+    for (const cookie of list) {
+      //Для каждого cookie-набора в этом списке:
+      if (!cookie.includes('=')) continue; // Пропустить, если нет знака =
+
+      const p = cookie.indexOf('='); // Найти первый знак =.
+      const name = cookie.substring(0, p); // Получить имя cookie-набора
+      let value = cookie.substring(p + 1); // Получить значение cookie-набора.
+
+      value = decodeURIComponent(value); // Декодировать значение,
+      cookies.set(name, value); // Запомнить имя и значение cookie-набора.
+    }
+    return cookies;
+  }
+  // ===========================
+  // Сохраняет пару имя/значение как cookie-набор, кодируя значение
+  // с помощью encodeURIComponent () для отмены точек с запятой,
+  // запятых и пробелов.
+  // options = { 'max-age': 5, 'path': '/', 'domain': 'example.com', 'secure': 'secure' }
+  // Передача 0 приводит к удалению cookie-набора,
+  setCookie(
+    name,
+    value,
+    options = { 'max-age': '', path: '', domain: '', secure: '' }
+  ) {
+    let cookie = `${name}=${encodeURIComponent(value)}`;
+    for (const option in options) {
+      if (options[option] !== '') {
+        if (option === 'max-age') {
+          cookie += `; ${option}=${options[option] * 60 * 60 * 24}`; // max-age принимает количество дней и переводит в секунды
+        } else if (option === 'secure') {
+          cookie += `; ${option}`;
+        } else {
+          cookie += `; ${option}=${options[option]}`;
+        }
+      }
+    }
+    document.cookie = cookie;
+  }
 }
 
 export default MyFunctions;
