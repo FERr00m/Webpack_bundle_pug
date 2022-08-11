@@ -3,8 +3,6 @@ header.header.jq-header
     transition(name='fade')
       nav.nav(v-show="visible")
         ul.nav__list
-          li.nav__item
-            a.nav__link(href='/') Главная
           each link in links
             li.nav__item
               a.nav__link(href=`${link.path}`)=link.name

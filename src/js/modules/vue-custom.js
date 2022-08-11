@@ -13,21 +13,23 @@ const vueCustom = () => {
       vueClick() {
         this.counter++;
         if (this.counter === 3) {
-          let t1 = gsap.timeline();
-          t1.to('.fa-thumbs-up', {
-            duration: 3,
-            rotation: 360,
-            x: 300,
-            ease: 'expo',
-            transform: 'scale(.5)',
-          });
-          t1.to('.fa-thumbs-up', {
-            duration: 2,
-            rotation: 360,
-            color: '#00807aba',
-            transform: 'scale(3.5)',
-            y: -200,
-          });
+          // let t1 = gsap.timeline();
+          // t1.to('.fa-thumbs-up', {
+          //   duration: 3,
+          //   rotation: 360,
+          //   x: 300,
+          //   ease: 'expo',
+          //   transform: 'scale(.5)',
+          // });
+          // t1.to('.fa-thumbs-up', {
+          //   duration: 2,
+          //   rotation: 360,
+          //   color: '#00807aba',
+          //   transform: 'scale(3.5)',
+          //   y: -200,
+          // });
+          $('.eye').addClass('is-alive');
+          gsap.to('.eye', { opacity: 1, duration: 5 });
           let t2 = gsap.timeline({ repeat: 2 });
           t2.to('body', {
             duration: 5,
@@ -39,6 +41,9 @@ const vueCustom = () => {
           });
           this.message += ' & GSAP';
         }
+      },
+      customEvent() {
+        myFunctions.customEventDispatch('alex', { detail: [{ name: 'alex' }] });
       },
       vueClick2() {
         this.counter++;

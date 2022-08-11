@@ -5,7 +5,10 @@ block main-content
     section.index-page__promo.promo-index
       ._container(style="display: flex; flex-direction: column; align-items: center; gap: 2rem")
         h1.title Главная страница {{ message }}
-        +icon('hipster-music', 400, 400)
+        .icon-wrap
+          +icon('robot', 600, 600)
+          .eye.eye--left.center-absolute
+          .eye.eye--right.center-absolute
         span(style='color: Dodgerblue; height: 96px')
           i.fa-solid.fa-thumbs-up.fa-6x
         button.btn.btn--large.btn--success(@click='vueClick')

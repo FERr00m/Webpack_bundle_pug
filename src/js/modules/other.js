@@ -1,5 +1,3 @@
-import MyFunctions from './MyFunctions';
-
 const other = () => {
   console.log('I am Other module');
 
@@ -15,6 +13,8 @@ const other = () => {
   myFunctions.fetchWithTimeout('https://picsum.photos/2000/3000', {
     timeout: 500,
   });
+
+  myFunctions.customEventSet('alex');
 };
 
 export default other;

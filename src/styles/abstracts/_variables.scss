@@ -45,11 +45,11 @@ $bg-main-color: #ffffff !default;
 $max-width: 1320px !default;
 
 $sizes: (
-  'xs': 20em,
-  'sm': 36em,
-  'md': 48em,
-  'lg': 62em,
-  'xl': 75em,
+  'xs': 20em,  // 320px
+  'sm': 36em,  // 576px
+  'md': 48em,  // 768px
+  'lg': 62em,  // 992px
+  'xl': 75em,  // 1200px
 );
 
 /// Breakpoints map

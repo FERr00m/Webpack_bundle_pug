@@ -33,16 +33,18 @@ class MyFunctions {
   customEventSet(name) {
     document.addEventListener(name, (е) => {
       if (е.detail) {
+        console.log(`Event "${name}" is trigerred `, е.detail);
         //showSpinner();
       } else {
+        console.log(e);
         //hideSpinner();
       }
     });
   }
-  customEventDispatch(name) {
+  customEventDispatch(name, detail = null) {
     // Отправить специальное событие, чтобы уведомить
     // пользовательский интерфейс о том, что мы заняты.
-    document.dispatchEvent(new CustomEvent('busy', { detail: true }));
+    document.dispatchEvent(new CustomEvent(name, detail));
     // Выполнить сетевую операцию,
     // fetch(url)
     //   .then(handleNetworkResponse)

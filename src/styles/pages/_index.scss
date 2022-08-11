@@ -2,12 +2,34 @@
 // This file contains styles that are specific to the "Index" page.
 // -----------------------------------------------------------------------------
 .index-page {
-  background-color: antiquewhite;
   display: flex;
-  max-width: rem(70px);
   margin: 0 auto;
   align-items: center;
   justify-content: center;
+}
+.icon-wrap {
+  position: relative;
+}
+.eye {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  border-radius: 50%;
+  top: 54%;
+  opacity: 0;
+}
+.eye--left {
+  left: 27%;
+}
+.eye--right {
+  left: 73%;
+}
+.eye.is-alive {
+  animation-duration: 8s;
+  animation-name: eyes;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 button.js-hover-btn {
   width: 15rem;
@@ -35,15 +57,15 @@ button.js-hover-btn {
   height: 100%;
   object-fit: cover;
 }
-.svg-icon--hipster-music {
-  animation-duration: 3s;
-  animation-name: rotate;
+.svg-icon--robots {
+  animation-duration: 8s;
+  animation-name: rotateY;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
 .title {
   animation-duration: 3s;
-  animation-name: rotateY;
+  animation-name: rotateColor;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
