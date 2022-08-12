@@ -7,9 +7,86 @@ const vueCustom = () => {
         message: 'With Vue!',
         counter: 0,
         visible: true,
+        errors: [],
+        form: {
+          NAME: {
+            value: '',
+            rules: [
+              {
+                required: true,
+                message: 'Это поле обязательно для заполнения',
+              },
+              {
+                minLength: 3,
+                message: 'Минимум 3 знака',
+              },
+            ],
+          },
+          EMAIL: null,
+          PHONE: null,
+          PASSWORD: null,
+          MESSAGE: null,
+          CHECKBOX: null,
+        },
       };
     },
+    mounted() {
+      //
+    },
+    computed: {
+      formErrors: function () {
+        return this.errors;
+      },
+    },
     methods: {
+      isValid(field, rules) {
+        let result;
+        rules.fo;
+        console.log(field);
+        console.log(rules);
+        return [false];
+      },
+      checkForm(e) {
+        let form = e.target;
+        let fields = form.querySelectorAll('.need-validation');
+        this.errors = [];
+        fields.forEach((field) => {
+          console.log(field.name);
+          let fieldErrors = {
+            name: field.previousSibling.textContent,
+            message: null,
+          };
+          switch (field.type) {
+            case 'text':
+              fieldErrors.message = this.isValid(
+                field,
+                this.form[field.name].rules
+              );
+              if (fieldErrors.message.length) this.errors.push(fieldErrors);
+              break;
+            case 'email':
+              // if (field.value.length < 3) {
+              //   fieldErrors.message.push('Mail < 3');
+              // }
+              // if (field.value.length < 5) {
+              //   fieldErrors.message.push('Mail < 5');
+              // }
+              // console.log('fieldErrors ', fieldErrors);
+              // if (fieldErrors.message.length) this.errors.push(fieldErrors);
+              break;
+            case 'tel':
+              break;
+            case 'textarea':
+              break;
+            case 'checkbox':
+              break;
+            case 'password':
+              break;
+          }
+          console.log(field);
+        });
+        console.log(this.errors);
+      },
       vueClick() {
         this.counter++;
         if (this.counter === 3) {

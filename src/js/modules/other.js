@@ -10,9 +10,9 @@ const other = () => {
     });
     splide.mount();
   }
-  myFunctions.fetchWithTimeout('https://picsum.photos/2000/3000', {
-    timeout: 500,
-  });
+  // myFunctions.fetchWithTimeout('https://picsum.photos/2000/3000', {
+  //   timeout: 500,
+  // });
 
   myFunctions.customEventSet('alex');
 };

@@ -25,4 +25,4 @@ vueCustom();
 other();
 jq();
 hoverEffectBtns();
-formValidator('.form');
+//formValidator('.form');

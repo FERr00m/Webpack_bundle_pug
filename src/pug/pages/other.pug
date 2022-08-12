@@ -10,10 +10,62 @@ block main-content
         button.btn(@click='customEvent') Click
     section
       ._container
-        form.form
-          input.need-validation(type="text")
-          input.need-validation(type="password", name="")
-          button(type="submit")
+        form.form(
+          @submit.prevent="checkForm"
+          novalidate="true"
+          action="https://vuejs.org/"
+          method="post"
+        )
+          .form__errors-block(v-if="formErrors.length")
+            b Пожалуйста, исправьте указанные ошибки:
+            template(v-for="arrError in formErrors")
+              p {{ arrError.name }}
+              ul
+                li(v-for="error in arrError.message") {{ error }}
+          label
+            span.form__span Имя
+            input.form__input.input--text.need-validation(
+              type="text"
+              v-model.trim="form.NAME.value"
+              name="NAME"
+              )
+          label
+            span.form__span Имейл
+            input.form__input.input--email.need-validation(
+              type="email"
+              v-model.trim="form.email"
+              name="EMAIL"
+              )
+          label
+            span.form__span Телефон
+            input.form__input.input--phone.need-validation(
+              type="tel"
+              v-model.trim="form.phone"
+              name="PHONE"
+              )
+          label
+            span.form__span Пароль
+            input.form__input.input--password.need-validation(
+              type="password"
+              v-model.trim="form.password"
+              name="PASSWORD"
+              )
+          label
+            span.form__span Сообщение
+            textarea.form__input.input--textarea.need-validation(
+              cols="30"
+              rows="10"
+              v-model.trim="form.message"
+              name="MESSAGE"
+              )
+          label
+            span.form__span Согласие
+            input.form__input.input--checkbox.need-validation(
+              type="checkbox"
+              v-model.trim="form.agree"
+              name="AGREE"
+              )
+          button(type="submit") Отправить
     section
       ._container
         each tab in tabs
