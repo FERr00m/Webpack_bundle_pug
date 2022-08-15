@@ -3,24 +3,25 @@ const hoverEffectBtns = () => {
     // Hover Effect for buttons
     //добавляет hover-эффект на кнопки
     function hoverEffect(elementParent, elementChild) {
-      console.log($(elementParent));
       $(elementParent)
-        .on('mouseenter', function(e) {
+        .on('mouseenter', function (e) {
           const parentOffset = $(this).offset(),
             relX = e.pageX - parentOffset.left,
             relY = e.pageY - parentOffset.top;
-          $(this).find(elementChild).css({top:relY, left:relX})
+          $(this).find(elementChild).css({ top: relY, left: relX });
         })
-        .on('mouseout', function(e) {
+        .on('mouseout', function (e) {
           const parentOffset = $(this).offset(),
             relX = e.pageX - parentOffset.left,
             relY = e.pageY - parentOffset.top;
-          $(this).find(elementChild).css({top:relY, left:relX})
+          $(this).find(elementChild).css({ top: relY, left: relX });
         });
     }
 
     hoverEffect('.js-hover-btn', '.span');
-  } catch (e) {console.error('Error in Hover Effect for buttons ', e)}
-}
+  } catch (e) {
+    console.error('Error in Hover Effect for buttons ', e);
+  }
+};
 
 export default hoverEffectBtns;

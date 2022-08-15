@@ -16,56 +16,92 @@ block main-content
           action="https://vuejs.org/"
           method="post"
         )
-          .form__errors-block(v-if="formErrors.length")
-            b Пожалуйста, исправьте указанные ошибки:
-            template(v-for="arrError in formErrors")
-              p {{ arrError.name }}
-              ul
-                li(v-for="error in arrError.message") {{ error }}
-          label
-            span.form__span Имя
-            input.form__input.input--text.need-validation(
+          label.form__label
+            input.form__input.input--text(
               type="text"
-              v-model.trim="form.NAME.value"
+              v-model.trim="forms.contacts.NAME"
               name="NAME"
+              data-validation-rules={
+                  minLength: 5,
+                  withoutSymbols: true,
+                  required: true
+                }
               )
-          label
-            span.form__span Имейл
-            input.form__input.input--email.need-validation(
+            span.form__span.required(:class="{ 'has-value': forms.contacts.NAME }") Имя
+            .form__errors-block(v-show="formErrors.length")
+              template(v-for="arrError in formErrors")
+                ul(v-if="arrError.NAME")
+                  li(v-for="error in arrError.NAME") {{ error }}
+          label.form__label
+            input.form__input.input--email(
               type="email"
-              v-model.trim="form.email"
+              v-model.trim="forms.contacts.EMAIL"
               name="EMAIL"
+              data-validation-rules={email: true}
               )
-          label
-            span.form__span Телефон
-            input.form__input.input--phone.need-validation(
+            span.form__span(:class="{ 'has-value': forms.contacts.EMAIL }") Имейл
+            .form__errors-block(v-show="formErrors.length")
+              template(v-for="arrError in formErrors")
+                ul(v-if="arrError.EMAIL")
+                  li(v-for="error in arrError.EMAIL") {{ error }}
+          label.form__label
+            input.form__input.input--phone(
               type="tel"
-              v-model.trim="form.phone"
+              v-model.trim="forms.contacts.PHONE"
               name="PHONE"
+              data-validation-rules={
+                  phone: true,
+                  required: true
+                }
               )
-          label
-            span.form__span Пароль
-            input.form__input.input--password.need-validation(
+            span.form__span.required(:class="{ 'has-value': forms.contacts.PHONE }") Телефон
+            .form__errors-block(v-show="formErrors.length")
+              template(v-for="arrError in formErrors")
+                ul(v-if="arrError.PHONE")
+                  li(v-for="error in arrError.PHONE") {{ error }}
+          label.form__label
+            input.form__input.input--password(
               type="password"
-              v-model.trim="form.password"
+              v-model.trim="forms.contacts.PASSWORD"
               name="PASSWORD"
+              data-validation-rules={minLength: 8}
               )
-          label
-            span.form__span Сообщение
-            textarea.form__input.input--textarea.need-validation(
+            span.form__span(:class="{ 'has-value': forms.contacts.PASSWORD }") Пароль
+            .form__errors-block(v-show="formErrors.length")
+              template(v-for="arrError in formErrors")
+                ul(v-if="arrError.PASSWORD")
+                  li(v-for="error in arrError.PASSWORD") {{ error }}
+          label.form__label
+            textarea.form__input.input--textarea(
               cols="30"
-              rows="10"
-              v-model.trim="form.message"
+              rows="3"
+              v-model.trim="forms.contacts.MESSAGE"
               name="MESSAGE"
+              data-validation-rules={
+                  minLength: 5,
+                  required: true
+                }
               )
-          label
+            span.form__span.required(:class="{ 'has-value': forms.contacts.MESSAGE }") Сообщение
+            .form__errors-block(v-show="formErrors.length")
+              template(v-for="arrError in formErrors")
+                ul(v-if="arrError.MESSAGE")
+                  li(v-for="error in arrError.MESSAGE") {{ error }}
+          label.form__label
             span.form__span Согласие
-            input.form__input.input--checkbox.need-validation(
+            input.form__input.input--checkbox(
               type="checkbox"
-              v-model.trim="form.agree"
+              v-model.trim="forms.contacts.AGREE"
               name="AGREE"
+              data-validation-rules={
+                  checkbox: true
+                }
               )
-          button(type="submit") Отправить
+            .form__errors-block(v-show="formErrors.length")
+              template(v-for="arrError in formErrors")
+                ul(v-if="arrError.AGREE")
+                  li(v-for="error in arrError.AGREE") {{ error }}
+          button.form__submit(type="submit") Отправить
     section
       ._container
         each tab in tabs

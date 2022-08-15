@@ -8,25 +8,15 @@ const vueCustom = () => {
         counter: 0,
         visible: true,
         errors: [],
-        form: {
-          NAME: {
-            value: '',
-            rules: [
-              {
-                required: true,
-                message: 'Это поле обязательно для заполнения',
-              },
-              {
-                minLength: 3,
-                message: 'Минимум 3 знака',
-              },
-            ],
+        forms: {
+          contacts: {
+            NAME: '',
+            EMAIL: '',
+            PHONE: '',
+            PASSWORD: '',
+            MESSAGE: '',
+            AGREE: '',
           },
-          EMAIL: null,
-          PHONE: null,
-          PASSWORD: null,
-          MESSAGE: null,
-          CHECKBOX: null,
         },
       };
     },
@@ -39,53 +29,103 @@ const vueCustom = () => {
       },
     },
     methods: {
-      isValid(field, rules) {
-        let result;
-        rules.fo;
-        console.log(field);
-        console.log(rules);
-        return [false];
+      isFieldValid(
+        field,
+        rules = {
+          required: false,
+          minLength: false,
+          withoutSymbols: false,
+          onlyDigits: false,
+          email: false,
+          phone: false,
+          checkbox: false,
+        }
+      ) {
+        const errors = [];
+
+        let fieldValue = field.value.trim(' ');
+
+        if (rules.required) {
+          let isEmpty = fieldValue.length === 0;
+          if (isEmpty) errors.push(`Поле обязательно для заполнения`);
+        }
+
+        if (rules.checkbox) {
+          let isChecked = field.checked;
+          if (!isChecked) errors.push(`Необходимо согласие`);
+        }
+
+        if (rules.minLength) {
+          let minLength = fieldValue.length < rules.minLength;
+          if (minLength)
+            errors.push(
+              `Поле должно содержать не менее ${rules.minLength} символов`
+            );
+        }
+
+        if (rules.withoutSymbols) {
+          let withoutSymbols = /[^a-zA-Z0-9а-яА-ЯеЁ ]/.test(fieldValue);
+          if (withoutSymbols) errors.push('Допустимы только буквы и/или цифры');
+        }
+
+        if (rules.onlyDigits) {
+          let isOnlyDigit = /^[0-9]$/.test(fieldValue);
+          if (!isOnlyDigit) errors.push('Допустимы только цифры');
+        }
+
+        if (rules.email) {
+          let isEmail =
+            /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,})$/.test(
+              fieldValue
+            );
+          if (!isEmail) errors.push('Неправильный формат электронной почты');
+        }
+
+        if (rules.phone) {
+          let isPhone =
+            /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(
+              fieldValue
+            );
+          if (!isPhone) errors.push('Неправильный формат телефона');
+        }
+
+        if (errors.length > 0) return { error: true, errors };
+
+        return true;
       },
       checkForm(e) {
         let form = e.target;
-        let fields = form.querySelectorAll('.need-validation');
+        let fields = form.querySelectorAll('[data-validation-rules]');
         this.errors = [];
         fields.forEach((field) => {
-          console.log(field.name);
+          field.classList.remove('has-error');
+          field.classList.remove('is-valid');
+
           let fieldErrors = {
-            name: field.previousSibling.textContent,
-            message: null,
+            [field.name]: [],
           };
-          switch (field.type) {
-            case 'text':
-              fieldErrors.message = this.isValid(
-                field,
-                this.form[field.name].rules
-              );
-              if (fieldErrors.message.length) this.errors.push(fieldErrors);
-              break;
-            case 'email':
-              // if (field.value.length < 3) {
-              //   fieldErrors.message.push('Mail < 3');
-              // }
-              // if (field.value.length < 5) {
-              //   fieldErrors.message.push('Mail < 5');
-              // }
-              // console.log('fieldErrors ', fieldErrors);
-              // if (fieldErrors.message.length) this.errors.push(fieldErrors);
-              break;
-            case 'tel':
-              break;
-            case 'textarea':
-              break;
-            case 'checkbox':
-              break;
-            case 'password':
-              break;
+          const rules = JSON.parse(field.dataset.validationRules);
+          let result = this.isFieldValid(field, rules);
+
+          if (result.error) {
+            fieldErrors[field.name] = result.errors;
           }
-          console.log(field);
+
+          if (fieldErrors[field.name].length > 0) {
+            this.errors.push(fieldErrors);
+            field.classList.add('has-error');
+          } else {
+            field.classList.add('is-valid');
+          }
         });
-        console.log(this.errors);
+        if (!this.errors.length) this.sendForm(form);
+      },
+      sendForm(form) {
+        let formData = new FormData(form);
+        fetch('https://google.com', {
+          method: 'POST',
+          body: formData,
+        });
       },
       vueClick() {
         this.counter++;

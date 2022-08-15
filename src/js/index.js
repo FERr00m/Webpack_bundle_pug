@@ -12,7 +12,6 @@ import '@/styles/style';
 // JS Modules
 import vueCustom from '@/js/modules/vue-custom';
 import MyFunctions from '@/js/modules/MyFunctions';
-import formValidator from '@/js/modules/formValidator';
 import other from '@/js/modules/other';
 import jq from '@/js/modules/jq';
 import hoverEffectBtns from '@/js/modules/hover-effect-btns';
@@ -25,4 +24,3 @@ vueCustom();
 other();
 jq();
 hoverEffectBtns();
-//formValidator('.form');
