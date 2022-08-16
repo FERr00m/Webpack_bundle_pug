@@ -7,7 +7,10 @@ const vueCustom = () => {
         message: 'With Vue!',
         counter: 0,
         visible: true,
+        number: 0,
+        tweened: 0,
         errors: [],
+        x: 0,
         forms: {
           contacts: {
             NAME: '',
@@ -16,6 +19,14 @@ const vueCustom = () => {
             PASSWORD: '',
             MESSAGE: '',
             AGREE: '',
+            ERRORS: [],
+          },
+          person: {
+            NAME: '',
+            EMAIL: '',
+            MESSAGE: '',
+            AGREE: '',
+            ERRORS: [],
           },
         },
       };
@@ -23,12 +34,24 @@ const vueCustom = () => {
     mounted() {
       //
     },
+    watch: {
+      number(n) {
+        gsap.to(this, { duration: 1, tweened: Number(n) || 0 });
+      },
+    },
     computed: {
-      formErrors: function () {
-        return this.errors;
+      formErrors: {
+        get() {
+          console.log(2);
+          //console.log(this.forms[formName]);
+          return true;
+        },
       },
     },
     methods: {
+      onMousemove(e) {
+        this.x = e.clientX;
+      },
       isFieldValid(
         field,
         rules = {
@@ -65,7 +88,7 @@ const vueCustom = () => {
 
         if (rules.withoutSymbols) {
           let withoutSymbols = /[^a-zA-Z0-9а-яА-ЯеЁ ]/.test(fieldValue);
-          if (withoutSymbols) errors.push('Допустимы только буквы и/или цифры');
+          if (withoutSymbols) errors.push('Допустимы только буквы или цифры');
         }
 
         if (rules.onlyDigits) {
@@ -94,38 +117,59 @@ const vueCustom = () => {
         return true;
       },
       checkForm(e) {
-        let form = e.target;
-        let fields = form.querySelectorAll('[data-validation-rules]');
-        this.errors = [];
-        fields.forEach((field) => {
-          field.classList.remove('has-error');
-          field.classList.remove('is-valid');
+        try {
+          let form = e.target;
+          let fields = form.querySelectorAll('[data-validation-rules]');
+          this.forms[form.dataset.formName].ERRORS = [];
+          fields.forEach((field) => {
+            field.classList.remove('has-error');
+            field.classList.remove('is-valid');
 
-          let fieldErrors = {
-            [field.name]: [],
-          };
-          const rules = JSON.parse(field.dataset.validationRules);
-          let result = this.isFieldValid(field, rules);
+            let fieldErrors = {
+              [field.name]: [],
+            };
+            const rules = JSON.parse(field.dataset.validationRules);
+            let result = this.isFieldValid(field, rules);
 
-          if (result.error) {
-            fieldErrors[field.name] = result.errors;
-          }
+            if (result.error) {
+              fieldErrors[field.name] = result.errors;
+            }
 
-          if (fieldErrors[field.name].length > 0) {
-            this.errors.push(fieldErrors);
-            field.classList.add('has-error');
-          } else {
-            field.classList.add('is-valid');
-          }
-        });
-        if (!this.errors.length) this.sendForm(form);
+            if (fieldErrors[field.name].length > 0) {
+              this.forms[form.dataset.formName].ERRORS.push(fieldErrors);
+              field.classList.add('has-error');
+            } else {
+              field.classList.add('is-valid');
+            }
+          });
+          console.log(this.forms[form.dataset.formName].ERRORS);
+          if (!this.forms[form.dataset.formName].ERRORS.length)
+            this.sendForm(form);
+          else form.scrollIntoView();
+        } catch (e) {
+          console.warn('Error in checkForm func ', e);
+        }
       },
-      sendForm(form) {
-        let formData = new FormData(form);
-        fetch('https://google.com', {
-          method: 'POST',
-          body: formData,
+      async sendForm(form) {
+        let body = {};
+        let fields = form.querySelectorAll('[data-validation-rules]');
+
+        fields.forEach((field) => {
+          body[field.name] = field.value;
         });
+
+        let response = await fetch(form.action, {
+          method: 'POST',
+          body: JSON.stringify(body),
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error('Problem on request');
+            return response.json();
+          })
+          .catch((e) => console.warn('Error in fetch ', e));
+        alert(`Ответ с сервера: ${JSON.stringify(response)}`);
+
+        console.log(response);
       },
       vueClick() {
         this.counter++;

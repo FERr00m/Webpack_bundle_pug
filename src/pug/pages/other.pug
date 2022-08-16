@@ -1,108 +1,19 @@
 extends ../templates/layout
 
 block main-content
-  main.other-page
-  - const tabs = ['Команда', 'Вакансии', 'Лицензии и сертификаты'];
-
-    section.other-page__promo
+  main.contacts-page
+    section.contacts-page__promo
       ._container
         h1.title Другое
-        button.btn(@click='customEvent') Click
+        button.js-hover-btn.hover-btn-animation(@click='vueClick2')
+          .span
+          span
+            | {{ counter > 2 ? 'Молодец! Теперь жди...' : 'Кликни 3 раза!' }} {{ counter }}
+        progress#progress(value="0")
+        img(width="600" height="300")
     section
       ._container
-        form.form(
-          @submit.prevent="checkForm"
-          novalidate="true"
-          action="https://vuejs.org/"
-          method="post"
-        )
-          label.form__label
-            input.form__input.input--text(
-              type="text"
-              v-model.trim="forms.contacts.NAME"
-              name="NAME"
-              data-validation-rules={
-                  minLength: 5,
-                  withoutSymbols: true,
-                  required: true
-                }
-              )
-            span.form__span.required(:class="{ 'has-value': forms.contacts.NAME }") Имя
-            .form__errors-block(v-show="formErrors.length")
-              template(v-for="arrError in formErrors")
-                ul(v-if="arrError.NAME")
-                  li(v-for="error in arrError.NAME") {{ error }}
-          label.form__label
-            input.form__input.input--email(
-              type="email"
-              v-model.trim="forms.contacts.EMAIL"
-              name="EMAIL"
-              data-validation-rules={email: true}
-              )
-            span.form__span(:class="{ 'has-value': forms.contacts.EMAIL }") Имейл
-            .form__errors-block(v-show="formErrors.length")
-              template(v-for="arrError in formErrors")
-                ul(v-if="arrError.EMAIL")
-                  li(v-for="error in arrError.EMAIL") {{ error }}
-          label.form__label
-            input.form__input.input--phone(
-              type="tel"
-              v-model.trim="forms.contacts.PHONE"
-              name="PHONE"
-              data-validation-rules={
-                  phone: true,
-                  required: true
-                }
-              )
-            span.form__span.required(:class="{ 'has-value': forms.contacts.PHONE }") Телефон
-            .form__errors-block(v-show="formErrors.length")
-              template(v-for="arrError in formErrors")
-                ul(v-if="arrError.PHONE")
-                  li(v-for="error in arrError.PHONE") {{ error }}
-          label.form__label
-            input.form__input.input--password(
-              type="password"
-              v-model.trim="forms.contacts.PASSWORD"
-              name="PASSWORD"
-              data-validation-rules={minLength: 8}
-              )
-            span.form__span(:class="{ 'has-value': forms.contacts.PASSWORD }") Пароль
-            .form__errors-block(v-show="formErrors.length")
-              template(v-for="arrError in formErrors")
-                ul(v-if="arrError.PASSWORD")
-                  li(v-for="error in arrError.PASSWORD") {{ error }}
-          label.form__label
-            textarea.form__input.input--textarea(
-              cols="30"
-              rows="3"
-              v-model.trim="forms.contacts.MESSAGE"
-              name="MESSAGE"
-              data-validation-rules={
-                  minLength: 5,
-                  required: true
-                }
-              )
-            span.form__span.required(:class="{ 'has-value': forms.contacts.MESSAGE }") Сообщение
-            .form__errors-block(v-show="formErrors.length")
-              template(v-for="arrError in formErrors")
-                ul(v-if="arrError.MESSAGE")
-                  li(v-for="error in arrError.MESSAGE") {{ error }}
-          label.form__label
-            span.form__span Согласие
-            input.form__input.input--checkbox(
-              type="checkbox"
-              v-model.trim="forms.contacts.AGREE"
-              name="AGREE"
-              data-validation-rules={
-                  checkbox: true
-                }
-              )
-            .form__errors-block(v-show="formErrors.length")
-              template(v-for="arrError in formErrors")
-                ul(v-if="arrError.AGREE")
-                  li(v-for="error in arrError.AGREE") {{ error }}
-          button.form__submit(type="submit") Отправить
-    section
-      ._container
-        each tab in tabs
-          h2=tab
+        .number-animation(@mousemove="onMousemove" :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }")
+          | Type a number:
+          input(type='number' v-model.number='number')
+          p.big-number(:style="{ fontSize: number +'px' }") {{ tweened.toFixed(0) }}px

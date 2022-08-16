@@ -49,6 +49,7 @@ textarea:focus {
     width: 100%;
     padding: .5em 1em;
     border-radius: .2em;
+    position: relative;
   }
   &__input.has-error {
     box-shadow: 0 0 2px .15rem $error-color;

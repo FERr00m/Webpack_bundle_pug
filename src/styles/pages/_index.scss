@@ -80,3 +80,16 @@ button.js-hover-btn {
   width: 100%;
   height: rem(60px);
 }
+.number-animation {
+  max-width: rem(600px);
+  padding: rem(50px);
+  margin: 0 auto;
+  transition: 0.3s background-color ease;
+}
+.big-number {
+  font-weight: bold;
+  font-size: 6rem;
+  padding: rem(50px);
+  text-shadow: 3px -3px 3px black;
+  transition: all 1s ease-in-out;
+}
