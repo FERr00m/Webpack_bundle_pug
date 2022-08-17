@@ -15,8 +15,9 @@ block main-content
             | {{ counter > 2 ? 'Молодец!' : 'Кликни 3 раза!' }} {{ counter }}
         span(style='color: Dodgerblue; height: 96px')
           i.fa-solid.fa-thumbs-up.fa-6x
-        +picture('12', 300, 300, 'alt')
+        +pictureLazy('12', 300, 300, 'alt')
         +icon('email-blue')
         figure
           +picture('3', 300, 300, 'alt')
           figcaption Foto
+        +dummyImg(300, 100, '00ddff')

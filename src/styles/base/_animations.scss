@@ -45,3 +45,8 @@
     top: 54%;
   }
 }
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}

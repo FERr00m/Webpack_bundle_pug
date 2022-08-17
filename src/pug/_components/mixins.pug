@@ -9,10 +9,22 @@ mixin randomNum(numMax = 100)
 
 //--------------------
 
+mixin pictureLazy(name, w=500, h=500, alt='', ext='jpg')
+  picture
+    source(type='image/webp' data-srcset=`/img/${name}.webp`)
+    img.lazy(data-src=`/img/${name}.${ext}` width=`${w}`, height=`${h}` alt=`${alt}` loading="lazy")
+
+//--------------------
+
 mixin picture(name, w=500, h=500, alt='', ext='jpg')
   picture
     source(type='image/webp' srcset=`/img/${name}.webp`)
-    img(src=`/img/${name}.${ext}` width=`${w}`, height=`${h}` alt=`${alt}` loading="lazy")
+    img(src=`/img/${name}.${ext}` width=`${w}`, height=`${h}` alt=`${alt}`)
+
+//--------------------
+
+mixin dummyImg(w=500, h=500, color='', alt='dummy image')
+  img.lazy(data-src=`http://dummyimage.com/${w}x${h}/${color}` width=`${w}`, height=`${h}` alt=`${alt}` loading="lazy")
 
 //--------------------
 
