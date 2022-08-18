@@ -21,6 +21,7 @@ block main-content
           label.form__label
             input.form__input.input--text(
               type="text"
+              placeholder="Alex"
               v-model.trim="forms.contacts.NAME"
               name="NAME"
               data-validation-rules={
@@ -39,6 +40,7 @@ block main-content
               type="email"
               v-model.trim="forms.contacts.EMAIL"
               name="EMAIL"
+              placeholder="example@mail.com"
               data-validation-rules={email: true}
               )
             span.form__span(:class="{ 'has-value': forms.contacts.EMAIL }") Имейл
