@@ -1,23 +1,44 @@
 extends ./templates/layout
 
 block main-content
-  main.index-page
-    section.index-page__promo.promo-index
-      ._container(style="display: flex; flex-direction: column; align-items: center; gap: 2rem")
-        h1.title Главная страница {{ message }}
-        .icon-wrap
-          +icon('robot', 600, 600)
-          .eye.eye--left.center-absolute
-          .eye.eye--right.center-absolute
-        button.btn.btn--large.btn--success(@click='vueClick')
-          .span
-          span
-            | {{ counter > 2 ? 'Молодец!' : 'Кликни 3 раза!' }} {{ counter }}
-        span(style='color: Dodgerblue; height: 96px')
-          i.fa-solid.fa-thumbs-up.fa-6x
-        +pictureLazy('12', 300, 300, 'alt')
-        +icon('email-blue')
-        figure
-          +picture('3', 300, 300, 'alt')
-          figcaption Foto
-        +dummyImg(300, 100, '00ddff')
+  main#index-banner.section.no-pad-bot
+    .container
+      h1.header.center.orange-text Starter Template
+      .row.center
+        h5.header.col.s12.light A modern responsive front-end framework based on Material Design
+      .row.center
+        button#download-button.btn-large.waves-effect.waves-light.orange() Get Started
+    .parallax-container(style='height: 350px')
+        .parallax
+          img(src='/img/3.jpg')
+    .container
+      section.section
+        // Icon Section
+        .row
+          .col.s12.m4
+            .icon-block
+              h2.center.light-blue-text
+                i.material-icons flash_on
+              h5.center Speeds up development
+              p.light
+                | We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.
+          .col.s12.m4
+            .icon-block
+              h2.center.light-blue-text
+                i.material-icons group
+              h5.center User Experience Focused
+              p.light
+                | By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.
+          .col.s12.m4
+            .icon-block
+              h2.center.light-blue-text
+                i.material-icons settings
+              h5.center Easy to work with
+              p.light
+                | We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.
+
+      .section.white
+        .row.container
+          h2.header Parallax
+          p.grey-text.text-darken-3.lighten-3
+            | Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.

@@ -21,6 +21,9 @@ head
   each font in fonts
     link(rel='preload' href=`/fonts/${font}.woff2` as='font' crossorigin)
   // End Fonts
+  // Materialize Icons
+  link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+  // End Materialize Icons
   // Favicon
   link(rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png")
   link(rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png")
@@ -30,8 +33,6 @@ head
   link(rel="icon" type="image/x-icon" href="/favicon/favicon.ico")
   meta(name="msapplication-TileColor" content="#da532c")
   meta(name="theme-color" content="#ffffff")
-
-  script(src="/libs/js/font-awesome-kit.js")
   // End Favicon
 
   title=site.title
