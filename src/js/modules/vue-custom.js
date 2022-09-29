@@ -5,6 +5,8 @@ const vueCustom = () => {
     data() {
       return {
         message: 'With Vue!',
+        modalOpen: false,
+        modalWasClosed: false,
         counter: 0,
         visible: true,
         number: 0,
@@ -22,6 +24,13 @@ const vueCustom = () => {
             ERRORS: [],
           },
           person: {
+            NAME: '',
+            EMAIL: '',
+            MESSAGE: '',
+            AGREE: '',
+            ERRORS: [],
+          },
+          getCall: {
             NAME: '',
             EMAIL: '',
             MESSAGE: '',
@@ -49,6 +58,18 @@ const vueCustom = () => {
       },
     },
     methods: {
+      openModal() {
+        this.modalOpen = !this.modalOpen;
+        this.modalWasClosed = false;
+        $('body').addClass('modal-active');
+      },
+      closeModal(e) {
+        if (!e.target.closest('.modal')) {
+          this.modalOpen = !this.modalOpen;
+          this.modalWasClosed = true;
+          $('body').removeClass('modal-active');
+        }
+      },
       onMousemove(e) {
         this.x = e.clientX;
       },
@@ -228,7 +249,13 @@ const vueCustom = () => {
         document.querySelector('html').style.fontSize = style + 'px';
       },
     },
-  }).mount('#app');
+  })
+    .component('custom-template', {
+      template: `<div>
+        <slot></slot>
+        </div>`,
+    })
+    .mount('#app');
 };
 
 export default vueCustom;

@@ -255,6 +255,43 @@ class MyFunctions {
     }
     document.cookie = cookie;
   }
+  //=======================================
+  //
+  //
+  //=======================================
+  // Приведение в безопасный вид текста.
+  // console.log(htmlEscape("<p class=\"greeting\">Hello world!</p>"));
+  // "&lt;p class=&quot;greeting&quot;&gt;Hello world!&lt;/p&gt";
+  htmlEscape(text) {
+    return text.replace(/[<>"&]/g, function (match, pos, originalText) {
+      switch (match) {
+        case '<':
+          return '&lt;';
+        case '>':
+          return '&gt;';
+        case '&':
+          return '&amp;';
+        case '"':
+          return '&quot;';
+      }
+    });
+  }
+  //=======================================
+  //
+  //
+  //=======================================
+  // Метод сравнивает string с string2 и возвращает в каком отношении (в алфавитном порядке)
+  // они друг к другу относятся
+  determineOrder(string, string2) {
+    let result = string.toLowerCase().localeCompare(string2.toLowerCase());
+    if (result < 0) {
+      console.log(`Строка '${string}' находится ДО строки '${string2}'.`);
+    } else if (result > 0) {
+      console.log(`Строка '${string}' находится ПОСЛЕ строки '${string2}'.`);
+    } else {
+      console.log(`Строка '${string}' идентична строке '${string2}'.`);
+    }
+  }
 }
 
 export default MyFunctions;
